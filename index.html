@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<script>(function(){try{var t=localStorage.getItem('exampleco-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ExampleCo KI-Agenten als Service: Voice, RAG und MCP. Spezialisierte Agenten für Sales, Marketing, Support, Buchhaltung und Assistenz — für Ihre Kunden und Ihr Team. DSGVO-konform." />
+<meta name="robots" content="index, follow" />
+<!-- TODO: set canonical/og:url to the final domain of this standalone site -->
+<link rel="canonical" href="https://example-company.example/ki-agenten-systeme" />
+<meta property="og:title" content="KI-Agenten als Flex-Service — ExampleCo" />
+<meta property="og:description" content="Voice, RAG, MCP. Spezialisierte KI-Agenten für Sales, Marketing, Support, Buchhaltung & Assistenz. Wir bauen Ihren KI-Service — Sie wählen, was Sie brauchen." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="de_DE" />
+<title>KI-Agenten als Flex-Service — ExampleCo</title>
+<link rel="icon" type="image/png" href="Appicon 1024X1024-01.png">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --charcoal:#4F4747;--slate:#777764;--ivory:#EBEBDE;
+  --amber:#F57C00;--teal:#26A69A;--green:#66BB6A;
+  --bg:#0e0d0c;--bg2:#161514;--bg3:#1c1b19;
+  --text:#d4d0c8;--text-dim:#7a7668;--text-bright:#f5f2ea;
+  --border:rgba(235,235,222,.04);--border-strong:rgba(235,235,222,.06);
+  --card-bg:rgba(255,255,255,.01);
+  --nav-bg:rgba(14,13,12,.7);
+  --grain-opacity:.35;
+  --on-amber:#0e0d0c;
+  --logo-filter:none;
+  --watermark-num:rgba(255,140,20,.45);
+  --watermark-quote:rgba(255,140,20,.42);
+}
+[data-theme="light"]{
+  --bg:#EBEBDE;--bg2:#E3E3D3;--bg3:#DBDBC9;
+  --text:#3a3434;--text-dim:#56564a;--text-bright:#2a2222;
+  --border:rgba(79,71,71,.14);--border-strong:rgba(79,71,71,.22);
+  --card-bg:rgba(79,71,71,.03);
+  --nav-bg:rgba(235,235,222,.78);
+  --grain-opacity:.10;
+  --logo-filter:invert(0.78) sepia(0.12) saturate(0.6) hue-rotate(345deg) brightness(0.55);
+  --watermark-num:rgba(245,124,0,.65);
+  --watermark-quote:rgba(245,124,0,.55);
+}
+body,nav,.thesis,.numbers,.num-card,.stack-item,footer,.contrast-card,.cta-btn,.theme-toggle,.nav-cta,.block,.role{transition:background-color .35s ease,color .35s ease,border-color .35s ease}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--amber);color:var(--on-amber)}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:var(--grain-opacity)}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0.6rem 3rem;display:flex;justify-content:space-between;align-items:center;
+  backdrop-filter:blur(20px);background:var(--nav-bg);border-bottom:1px solid var(--border)}
+.logo a{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.logo img{filter:var(--logo-filter);transition:filter .35s ease}
+.logo .wordmark{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1rem;letter-spacing:.15em;color:var(--ivory);text-transform:uppercase}
+.logo .wordmark span{color:var(--amber)}
+nav ul{list-style:none;display:flex;gap:2.2rem}
+nav a{color:var(--text-dim);text-decoration:none;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;transition:color .3s}
+nav a:hover{color:var(--amber)}
+.nav-cta{color:var(--amber)!important;border:1px solid var(--amber);padding:.45rem 1.2rem;transition:all .3s}
+.nav-cta:hover{background:var(--amber);color:var(--on-amber)!important}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.theme-toggle{background:none;border:1px solid var(--border-strong);color:var(--text-dim);width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:color .3s,border-color .3s,background-color .3s}
+.theme-toggle:hover{color:var(--amber);border-color:var(--amber)}
+.theme-toggle svg{width:16px;height:16px;display:block}
+.theme-toggle .icon-sun,.theme-toggle .icon-moon{display:none}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+[data-theme="light"] .theme-toggle .icon-moon{display:block}
+
+/* ─── HERO ─── */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-20%;right:-10%;width:70vw;height:70vw;
+  background:radial-gradient(circle,rgba(38,166,154,.07) 0%,transparent 65%);pointer-events:none}
+.hero-label{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:1rem;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:2rem;
+  display:flex;align-items:center;gap:1rem}
+.hero-label::before{content:'';width:3rem;height:1px;background:var(--amber)}
+.hero h1{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:900;font-size:clamp(2.8rem,7vw,6rem);line-height:1.05;color:var(--text-bright);max-width:16ch;margin-bottom:2rem}
+.hero h1 em{font-style:normal;color:var(--amber);position:relative}
+.hero h1 em::after{content:'';position:absolute;bottom:.08em;left:0;right:0;height:3px;background:var(--amber);opacity:.4}
+.hero-sub{font-size:1.15rem;line-height:1.8;color:var(--text-dim);max-width:48ch;margin-bottom:3rem;font-weight:300}
+
+/* ─── THESIS STRIP ─── */
+.thesis{background:var(--bg2);border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:4rem 3rem;overflow:hidden}
+.thesis-inner{display:flex;gap:1rem;align-items:baseline;white-space:nowrap;animation:scroll-left 30s linear infinite}
+@keyframes scroll-left{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.thesis-inner span{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:clamp(1.2rem,3vw,2rem);font-weight:700;color:var(--text-dim);opacity:.35;padding:0 2rem}
+.thesis-inner span.highlight{color:var(--amber);opacity:1}
+.thesis-inner span::after{content:'◆';margin-left:4rem;font-size:.5em;vertical-align:middle;color:var(--slate);opacity:.3}
+
+/* ─── SECTION SHELL ─── */
+.system{padding:8rem 3rem;max-width:1200px;margin:0 auto}
+.system-label{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.system-label.teal{color:var(--teal)}
+.system-label::before{content:'';width:3rem;height:1px;background:var(--amber)}
+.system-label.teal::before{background:var(--teal)}
+.system h2{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--text-bright);margin-bottom:1rem;max-width:20ch}
+.system-sub{font-size:1.05rem;color:var(--text-dim);line-height:1.8;max-width:54ch;margin-bottom:4rem;font-weight:300}
+
+/* ─── BAUSTEINE (Voice/RAG/MCP) — 3 Spalten ─── */
+.blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-strong)}
+.block{background:var(--bg);padding:3.75rem 3rem;position:relative;transition:background .3s}
+.block:hover{background:var(--bg2)}
+.block-num{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:800;font-size:3.75rem;color:var(--watermark-num);position:absolute;top:1.8rem;right:1.8rem;line-height:1}
+.block h3{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:700;font-size:1.4rem;color:var(--text-bright);margin-bottom:1.1rem;letter-spacing:.02em}
+.block p{font-size:1.05rem;color:var(--text-dim);line-height:1.85;font-weight:300}
+.block .tag{display:inline-block;margin-top:1.5rem;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(38,166,154,.2);padding:.42rem .9rem}
+
+/* ─── ROLLEN (Sales/Marketing/...) — auto grid ─── */
+.numbers{background:var(--bg3);padding:6rem 3rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.numbers-inner{max-width:1200px;margin:0 auto}
+.numbers-label{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+.numbers-label::before{content:'';width:3rem;height:1px;background:var(--teal)}
+.numbers h2{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:800;font-size:clamp(1.6rem,3.5vw,2.4rem);color:var(--text-bright);margin-bottom:3rem;max-width:24ch}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.role{padding:2.5rem;border:1px solid var(--border-strong);background:var(--card-bg);position:relative;overflow:hidden;transition:border-color .3s}
+.role:hover{border-color:var(--amber)}
+.role .role-name{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.25rem;color:var(--amber);line-height:1.1;margin-bottom:1rem}
+.role p{font-size:.92rem;color:var(--text-dim);line-height:1.75;font-weight:300}
+.role::after{content:'';position:absolute;top:0;right:0;width:60%;height:100%;background:linear-gradient(135deg,transparent 50%,rgba(245,124,0,.02));pointer-events:none}
+
+/* ─── ZWEI ZIELGRUPPEN (split) ─── */
+.audience{padding:8rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;max-width:1200px;margin:0 auto}
+.audience-col h3{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:800;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-bright);margin-bottom:1.5rem}
+.audience-col h3 span{color:var(--amber)}
+.audience-col ul{list-style:none;display:flex;flex-direction:column;gap:1.25rem}
+.audience-col li{padding-left:1.75rem;position:relative;font-size:1rem;line-height:1.7;color:var(--text-dim);font-weight:300}
+.audience-col li::before{content:'';position:absolute;left:0;top:.6em;width:.7rem;height:1px;background:var(--teal)}
+
+/* ─── CTA ─── */
+.cta-section{padding:8rem 3rem;text-align:center;position:relative}
+.cta-section::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60vw;height:60vw;
+  background:radial-gradient(circle,rgba(245,124,0,.04) 0%,transparent 60%);pointer-events:none}
+.cta-section h2{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3.5rem);color:var(--text-bright);margin-bottom:1.5rem;line-height:1.1}
+.cta-section h2 em{font-style:normal;color:var(--amber)}
+.cta-section p{font-size:1rem;color:var(--text-dim);max-width:44ch;margin:0 auto 3rem;line-height:1.8;font-weight:300}
+.cta-btn{display:inline-block;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
+  color:var(--on-amber);background:var(--amber);padding:1.1rem 3rem;border:none;cursor:pointer;position:relative;transition:all .3s}
+.cta-btn:hover{background:var(--text-bright);color:var(--bg)}
+.cta-btn::after{content:'→';margin-left:1rem;transition:transform .3s}
+.cta-btn:hover::after{transform:translateX(4px)}
+.cta-btn.ghost{background:transparent;color:var(--amber);border:1px solid var(--amber)}
+.cta-btn.ghost:hover{background:var(--amber);color:var(--on-amber)}
+.cta-btn.ghost::after{content:'↓'}
+.cta-btn.ghost:hover::after{transform:translateY(3px)}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+
+/* ─── FOOTER ─── */
+footer{border-top:1px solid var(--border);padding:3rem;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--text-dim);flex-wrap:wrap;gap:1rem}
+footer a{color:var(--text-dim);text-decoration:none}
+footer a:hover{color:var(--amber)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}nav ul{gap:1.2rem}
+  .hero{padding:7rem 1.5rem 3rem}.hero h1{font-size:clamp(2rem,8vw,3.5rem)}
+  .system{padding:5rem 1.5rem}
+  .numbers{padding:4rem 1.5rem}
+  .blocks{grid-template-columns:1fr}
+  .audience{grid-template-columns:1fr;gap:3rem;padding:5rem 1.5rem}
+}
+@media(max-width:600px){
+  nav ul{display:none}
+  .hero{padding:6rem 1.2rem 2rem}
+  .logo .wordmark{display:none}
+}
+
+/* ─── ANIMATIONS ─── */
+.reveal,.reveal-left,.reveal-right,.reveal-zoom{
+  opacity:0;
+  transition:opacity .9s cubic-bezier(0.16,1,0.3,1),transform .9s cubic-bezier(0.16,1,0.3,1);
+  transition-delay:var(--d,0ms);
+  will-change:opacity,transform
+}
+.reveal{transform:translateY(40px)}
+.reveal-left{transform:translateX(-40px)}
+.reveal-right{transform:translateX(40px)}
+.reveal-zoom{transform:scale(.94)}
+.reveal.visible,.reveal-left.visible,.reveal-right.visible,.reveal-zoom.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal,.reveal-left,.reveal-right,.reveal-zoom{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body id="top">
+
+<nav>
+  <div class="logo"><a href="#top"><img src="Logo-09.png" alt="ExampleCo" style="height:40px;display:block"><span class="wordmark">KI<span>·</span>Agenten</span></a></div>
+  <div class="nav-right">
+    <ul>
+      <li><a href="#bausteine">Bausteine</a></li>
+      <li><a href="#agenten">Agenten</a></li>
+      <li><a href="#zielgruppen">Einsatz</a></li>
+      <li><a href="https://example-company.example" target="_blank" rel="noopener">↗ ExampleCo</a></li>
+      <li><a href="https://termine.example-company.example" target="_blank" rel="noopener" class="nav-cta">Gespräch buchen</a></li>
+    </ul>
+    <button class="theme-toggle" type="button" aria-label="Theme wechseln" title="Theme wechseln">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-label reveal">KI-Agenten · Flex-Service</div>
+  <h1 class="reveal" style="--d:120ms">KI-Agenten, die für Ihr Unternehmen <em>sprechen, schreiben und arbeiten.</em></h1>
+  <p class="hero-sub reveal" style="--d:260ms">Wir bauen Ihren KI-Service — Sie wählen die Bausteine. KI-Telefonie (Voice), wissensbasierte RAG-Systeme und MCP-Anbindungen, modular kombiniert, DSGVO-konform und nahtlos in Ihre Prozesse integriert. Für Ihre Kunden und für Ihr Team.</p>
+  <div class="hero-actions reveal" style="--d:400ms">
+    <a href="https://termine.example-company.example" target="_blank" rel="noopener" class="cta-btn">Gespräch vereinbaren</a>
+    <a href="#bausteine" class="cta-btn ghost">Bausteine ansehen</a>
+  </div>
+</section>
+
+<!-- ─── THESIS TICKER ─── -->
+<div class="thesis reveal">
+  <div class="thesis-inner">
+    <span class="highlight">Voice</span>
+    <span>rund um die Uhr</span>
+    <span class="highlight">RAG</span>
+    <span>Wissen aus Ihren Daten</span>
+    <span class="highlight">MCP</span>
+    <span>verbindet Ihre Systeme</span>
+    <span class="highlight">Voice</span>
+    <span>kein verpasster Anruf</span>
+    <span class="highlight">RAG</span>
+    <span>präzise Antworten</span>
+    <span class="highlight">MCP</span>
+    <span>für Team &amp; Kunden</span>
+    <span class="highlight">Voice</span>
+    <span>rund um die Uhr</span>
+    <span class="highlight">RAG</span>
+    <span>Wissen aus Ihren Daten</span>
+    <span class="highlight">MCP</span>
+    <span>verbindet Ihre Systeme</span>
+    <span class="highlight">Voice</span>
+    <span>kein verpasster Anruf</span>
+    <span class="highlight">RAG</span>
+    <span>präzise Antworten</span>
+    <span class="highlight">MCP</span>
+    <span>für Team &amp; Kunden</span>
+  </div>
+</div>
+
+<!-- ─── BAUSTEINE ─── -->
+<section class="system" id="bausteine">
+  <div class="system-label teal reveal-left">Der Flex-Service</div>
+  <h2 class="reveal-left" style="--d:100ms">Sie wählen, was Sie brauchen.</h2>
+  <p class="system-sub reveal-left" style="--d:200ms">Drei Bausteine — einzeln einsetzbar oder als gemeinsames System. Wir richten sie auf Ihre Branche, Ihre Daten und Ihre Tools aus. Kein Produkt von der Stange, sondern ein KI-Service, der zu Ihrem Unternehmen passt.</p>
+  <div class="blocks">
+    <div class="block reveal">
+      <div class="block-num">01</div>
+      <h3>KI-Telefonie (Voice)</h3>
+      <p>KI-Telefonagenten, die Anrufe annehmen, Anliegen qualifizieren und Termine buchen — in natürlicher Sprache, rund um die Uhr. Kein verpasster Anruf, keine Warteschleife.</p>
+      <span class="tag">ElevenLabs · Telnyx</span>
+    </div>
+    <div class="block reveal" style="--d:120ms">
+      <div class="block-num">02</div>
+      <h3>RAG-Systeme</h3>
+      <p>Wissensbasierte KI auf Grundlage Ihrer eigenen Dokumente. Antworten direkt aus Ihren Daten — präzise, nachvollziehbar und immer auf dem aktuellen Stand.</p>
+      <span class="tag">Retrieval-Augmented Generation</span>
+    </div>
+    <div class="block reveal" style="--d:240ms">
+      <div class="block-num">03</div>
+      <h3>MCP-Anbindung</h3>
+      <p>MCP-Server, die Ihre KI sicher mit Tools, Systemen und Datenquellen verbinden — für Mitarbeiter im internen Einsatz und für Kunden in Ihren Produkten.</p>
+      <span class="tag">Model Context Protocol</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ROLLEN / SPEZIALISIERTE AGENTEN ─── -->
+<section class="numbers" id="agenten">
+  <div class="numbers-inner">
+    <div class="numbers-label reveal">Spezialisierte Agenten</div>
+    <h2 class="reveal" style="--d:80ms">Ein Agent für jede Aufgabe in Ihrem Unternehmen.</h2>
+    <div class="roles">
+      <div class="role reveal">
+        <div class="role-name">Sales-Agent</div>
+        <p>Qualifiziert Leads, beantwortet Produktfragen, erstellt Angebote und übernimmt Follow-ups — damit Ihr Vertrieb sich auf den Abschluss konzentriert.</p>
+      </div>
+      <div class="role reveal" style="--d:100ms">
+        <div class="role-name">Marketing-Agent</div>
+        <p>Erstellt Content, plant Kampagnen und wertet Ergebnisse aus. Konsistent in Ihrer Markenstimme, skalierbar über alle Kanäle.</p>
+      </div>
+      <div class="role reveal" style="--d:200ms">
+        <div class="role-name">Support-Agent</div>
+        <p>Beantwortet Kundenanfragen rund um die Uhr, löst Standardfälle selbstständig und übergibt komplexe Tickets sauber an Ihr Team.</p>
+      </div>
+      <div class="role reveal" style="--d:300ms">
+        <div class="role-name">Buchhaltungs-Agent</div>
+        <p>Erfasst Belege, sortiert Rechnungen vor und bereitet Daten für Ihre Buchhaltung auf — weniger Routine, weniger Fehler.</p>
+      </div>
+      <div class="role reveal" style="--d:400ms">
+        <div class="role-name">Assistent</div>
+        <p>Ihr interner KI-Assistent für Termine, Recherche, Zusammenfassungen und wiederkehrende Aufgaben — verbunden mit Ihren Systemen über MCP.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ZWEI ZIELGRUPPEN ─── -->
+<section class="audience" id="zielgruppen">
+  <div class="audience-col reveal-left">
+    <h3>Für Ihre <span>Kunden</span></h3>
+    <ul>
+      <li>KI-Telefonie, die jeden Anruf annimmt und Termine direkt vereinbart.</li>
+      <li>RAG-gestützte Antworten, die Kundenfragen sofort und präzise aus Ihrem Wissen lösen.</li>
+      <li>24/7-Erreichbarkeit, die Wartezeiten und Reibung aus dem Kundenerlebnis nimmt.</li>
+      <li>MCP-gestützte Produkte, in denen KI direkt mit Ihren Diensten arbeitet.</li>
+    </ul>
+  </div>
+  <div class="audience-col reveal-right">
+    <h3>Für Ihr <span>Team</span></h3>
+    <ul>
+      <li>Interne Agenten für Sales, Marketing, Support und Buchhaltung.</li>
+      <li>Ein Assistent, der Routine übernimmt und Wissen sofort verfügbar macht.</li>
+      <li>RAG-Systeme, die Antworten aus Ihren internen Dokumenten liefern.</li>
+      <li>MCP-Anbindung an CRM, ERP und Ihre bestehenden Werkzeuge.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section">
+  <h2 class="reveal-zoom">Bereit, Ihr Unternehmen zu <em>verbessern</em>?</h2>
+  <p class="reveal" style="--d:150ms">30 Minuten. Keine Slides. Wir schauen uns Ihre Prozesse an und stellen das KI-System zusammen, das den größten Hebel hat.</p>
+  <a href="https://termine.example-company.example" class="cta-btn reveal" style="--d:300ms" target="_blank" rel="noopener">Gespräch vereinbaren</a>
+</section>
+
+<footer>
+  <span>© 2026 Example Company GmbH</span>
+  <span><a href="https://example-company.example" target="_blank" rel="noopener">ExampleCo</a> · <a href="https://example-company.example/impressum" target="_blank" rel="noopener">Impressum</a> · <a href="https://example-company.example/datenschutz" target="_blank" rel="noopener">Datenschutz</a></span>
+</footer>
+
+<script>
+// Theme toggle
+(function(){
+  var root = document.documentElement;
+  var btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('exampleco-theme', next); } catch(e) {}
+  });
+})();
+
+// Reveal animations
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
